@@ -64,3 +64,29 @@ if(!('ViewTransition' in window)&&!matchMedia('(prefers-reduced-motion: reduce)'
  addEventListener('pageshow',()=>{navigating=false;document.body.classList.remove('page-leaving')});
 }
 
+
+// A small pooled canvas keeps the landing-page pixel trail off the DOM.
+if(document.body.classList.contains('home-page')&&matchMedia('(pointer: fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ const canvas=document.createElement('canvas');canvas.className='pixel-trail';canvas.setAttribute('aria-hidden','true');document.body.append(canvas);
+ const ctx=canvas.getContext('2d');
+ if(ctx){
+  let width=0,height=0,dpr=1,raf=0,lastX=null,lastY=null,lastTime=0;
+  const pixels=[],colors=['#161bc6','#2928ec','#88d4e8','#ffffff'];
+  function size(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=innerHeight;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function draw(now){const dt=Math.min((now-lastTime)||16,40);lastTime=now;ctx.clearRect(0,0,width,height);
+   for(let i=pixels.length-1;i>=0;i--){const p=pixels[i];p.age+=dt;if(p.age>=p.life){pixels.splice(i,1);continue;}const fade=1-p.age/p.life;ctx.globalAlpha=fade*fade*.7;ctx.fillStyle=p.color;ctx.fillRect(Math.round(p.x+p.dx*p.age/1000),Math.round(p.y+p.dy*p.age/1000),p.size,p.size);}
+   ctx.globalAlpha=1;raf=pixels.length?requestAnimationFrame(draw):0;
+  }
+  size();addEventListener('resize',size,{passive:true});
+  addEventListener('pointermove',event=>{
+   if(event.pointerType==='touch'||document.hidden)return;
+   const x=event.clientX,y=event.clientY;if(lastX===null){lastX=x;lastY=y;return;}
+   const distance=Math.hypot(x-lastX,y-lastY);if(distance<4)return;
+   const count=Math.min(8,Math.ceil(distance/8));
+   for(let i=0;i<count;i++){const t=(i+1)/count;pixels.push({x:lastX+(x-lastX)*t+(Math.random()-.5)*12,y:lastY+(y-lastY)*t+(Math.random()-.5)*12,size:Math.random()<.8?2:3,age:0,life:350+Math.random()*350,dx:(Math.random()-.5)*14,dy:(Math.random()-.5)*14,color:colors[Math.floor(Math.random()*colors.length)]});}
+   if(pixels.length>140)pixels.splice(0,pixels.length-140);lastX=x;lastY=y;if(!raf){lastTime=performance.now();raf=requestAnimationFrame(draw);}
+  },{passive:true});
+  document.addEventListener('pointerleave',()=>{lastX=null;lastY=null});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;pixels.length=0;ctx.clearRect(0,0,width,height);lastX=null;lastY=null;}});
+ }
+}
