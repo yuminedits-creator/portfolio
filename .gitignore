@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+.env*
+*.zip
+# Keep original films out of Git; replace page sources with hosted video URLs before launch.
+dist/assets/**/*.mp4
+
+!dist/assets/ubc-biztech/film.mp4
