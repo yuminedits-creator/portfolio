@@ -142,3 +142,25 @@ body.home-page{height:100svh;overflow:hidden}.home-page .home{height:100svh;min-
 .home .artwork{filter:saturate(.91) sepia(.055)}
 .home::before{filter:saturate(.91) sepia(.055)}
 @media(prefers-reduced-motion:reduce){.home .project-card{will-change:auto}}
+
+/* Center the socials beneath the landscape signature on every screen. */
+.home-page .signature{bottom:12%}
+.home-page .landscape-socials{left:50%;right:auto;bottom:4.5%;transform:translateX(-50%);width:max-content;justify-content:center;gap:25px}
+/* Glass footer: translucent depth, rim light, and restrained chromatic edges. */
+.interior-page .social-footer{margin:22px 5vw 28px;padding:25px 30px;border-radius:24px;border:1px solid rgba(255,255,255,.3);background:linear-gradient(125deg,rgba(255,255,255,.14),rgba(255,255,255,.035) 48%,rgba(255,255,255,.09));backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 1px 0 0 rgba(117,226,255,.26),inset -1px 0 0 rgba(255,154,192,.24),0 8px 28px rgba(7,40,59,.16),0 0 20px rgba(197,233,241,.07);isolation:isolate;overflow:hidden}
+.interior-page .social-footer::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,rgba(133,222,255,.10),transparent 24%,transparent 77%,rgba(255,156,198,.08));z-index:-1}
+.interior-page .social-footer a{text-shadow:-.45px 0 1px rgba(121,224,255,.42),.45px 0 1px rgba(255,168,202,.32),0 0 12px rgba(255,255,255,.15)}
+@media(max-width:700px){.home-page .signature{bottom:13%}.home-page .landscape-socials{bottom:4.5%;gap:25px}.interior-page .social-footer{margin:18px 20px 22px;padding:23px;border-radius:21px}}
+@media(prefers-reduced-transparency:reduce){.interior-page .social-footer{background:#246d80;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Glass surrounds existing controls without changing their typography or layout. */
+.home-page header nav{position:relative;isolation:isolate}
+.home-page header nav::before,.home-page .landscape-socials::before{content:"";position:absolute;inset:-15px -25px;z-index:-1;pointer-events:none;border-radius:23px;border:1px solid rgba(255,255,255,.3);background:linear-gradient(125deg,rgba(255,255,255,.14),rgba(255,255,255,.035) 48%,rgba(255,255,255,.09));backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 1px 0 0 rgba(117,226,255,.26),inset -1px 0 0 rgba(255,154,192,.24),0 8px 28px rgba(7,40,59,.16),0 0 20px rgba(197,233,241,.07)}
+.home-page header nav{width:max-content;margin-left:auto;margin-right:auto}
+.home-page .landscape-socials{isolation:isolate}
+.home-page .landscape-socials::before{inset:-7px -20px;border-radius:19px}
+@media(max-width:700px){.home-page header nav::before{inset:-13px -20px;border-radius:21px}}
+@media(prefers-reduced-transparency:reduce){.home-page header nav::before,.home-page .landscape-socials::before{background:#246d80;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Lighter glass with less diffusion. */
+.home-page header nav::before,.home-page .landscape-socials::before,.interior-page .social-footer{background:linear-gradient(125deg,rgba(255,255,255,.075),rgba(255,255,255,.018) 48%,rgba(255,255,255,.045));backdrop-filter:blur(7px) saturate(110%);-webkit-backdrop-filter:blur(7px) saturate(110%);border-color:rgba(255,255,255,.21);box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 1px 0 0 rgba(117,226,255,.14),inset -1px 0 0 rgba(255,154,192,.12),0 5px 18px rgba(7,40,59,.08),0 0 14px rgba(197,233,241,.04)}
