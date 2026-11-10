@@ -106,3 +106,32 @@ body.home-page{height:auto;overflow-x:hidden;overflow-y:auto}.home-page .home{he
 @media(max-width:700px){.about-page{padding-top:120px}.social-footer{padding:28px 25px;align-items:flex-start;flex-direction:column;gap:18px}.social-links{gap:26px}.back.landscape-back{font-size:12px;padding:11px 15px}}
 
 .youtube-player{width:100%;aspect-ratio:16/9;background:#090b09;border:1px solid #ffffff30}.youtube-player iframe{display:block;width:100%;height:100%;border:0}
+
+/* Social links live within the landscape, without a scrolling footer. */
+body.home-page{height:100svh;overflow:hidden}.home-page .home{height:100svh;min-height:0}
+.landscape-socials{position:absolute;bottom:22px;right:4vw;z-index:3;display:flex;gap:22px;font-size:12px;color:#fff;text-shadow:0 0 12px #ffffff40}.landscape-socials a{padding:7px 0;border-bottom:1px solid transparent}.landscape-socials a:hover{border-color:#fff}
+@media(max-width:700px){.landscape-socials{right:0;left:0;bottom:12px;justify-content:center;gap:25px;font-size:11px}.home-page .signature{bottom:10%}}
+
+/* Individual digital signatures, using one cobalt palette and pixel scale. */
+.home .artwork{--chip:var(--cobalt);position:relative}
+.home a[href="saccade.html"] .artwork{clip-path:polygon(0 0,88% 0,88% 9%,100% 9%,100% 31%,94% 31%,94% 62%,100% 62%,100% 100%,12% 100%,12% 91%,0 91%)}
+.home a[href="okibi.html"] .artwork{clip-path:polygon(7% 0,100% 0,100% 79%,91% 79%,91% 91%,80% 91%,80% 100%,0 100%,0 23%,7% 23%)}
+.home a[href="treena.html"] .artwork{clip-path:polygon(0 0,76% 0,76% 8%,88% 8%,88% 17%,100% 17%,100% 100%,0 100%,0 67%,8% 67%,8% 57%,0 57%)}
+.home a[href="event-recap.html"] .artwork{clip-path:polygon(0 8%,18% 8%,18% 0,100% 0,100% 40%,93% 40%,93% 52%,100% 52%,100% 91%,85% 91%,85% 100%,0 100%)}
+.home a[href="residency-promo.html"] .artwork{clip-path:polygon(0 0,100% 0,100% 64%,92% 64%,92% 76%,84% 76%,84% 88%,100% 88%,100% 100%,9% 100%,9% 85%,0 85%)}
+.home a[href="ubc-biztech.html"] .artwork{clip-path:polygon(0 0,91% 0,91% 13%,100% 13%,100% 100%,26% 100%,26% 92%,13% 92%,13% 82%,0 82%,0 44%,7% 44%,7% 33%,0 33%)}
+.home .artwork::before{content:"";position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;box-shadow:none}
+.home a[href="saccade.html"] .artwork::before{background:linear-gradient(var(--sky),var(--sky)) 13% 0/7% 14% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 100% 18%/15% 26% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 87% 100%/13% 10% no-repeat,linear-gradient(var(--sky),var(--sky)) 94% 59%/6% 12% no-repeat}
+.home a[href="okibi.html"] .artwork::before{background:linear-gradient(var(--cobalt),var(--cobalt)) 0 62%/15% 25% no-repeat,linear-gradient(var(--sky),var(--sky)) 23% 100%/8% 12% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 90% 0/10% 7% no-repeat,linear-gradient(var(--sky),var(--sky)) 67% 8%/5% 9% no-repeat}
+.home a[href="treena.html"] .artwork::before{background:linear-gradient(var(--cobalt),var(--cobalt)) 100% 83%/17% 22% no-repeat,linear-gradient(var(--sky),var(--sky)) 13% 18%/7% 11% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 8% 0/13% 6% no-repeat,linear-gradient(var(--sky),var(--sky)) 87% 35%/5% 9% no-repeat}
+.home a[href="event-recap.html"] .artwork::before{background:linear-gradient(var(--cobalt),var(--cobalt)) 0 23%/16% 24% no-repeat,linear-gradient(var(--sky),var(--sky)) 83% 100%/7% 13% no-repeat,linear-gradient(var(--sky),var(--sky)) 23% 0/6% 9% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 95% 74%/7% 6% no-repeat}
+.home a[href="residency-promo.html"] .artwork::before{background:linear-gradient(var(--cobalt),var(--cobalt)) 100% 6%/17% 24% no-repeat,linear-gradient(var(--sky),var(--sky)) 5% 16%/9% 12% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 16% 100%/14% 8% no-repeat,linear-gradient(var(--sky),var(--sky)) 85% 70%/6% 10% no-repeat}
+.home a[href="ubc-biztech.html"] .artwork::before{background:linear-gradient(var(--cobalt),var(--cobalt)) 0 5%/17% 25% no-repeat,linear-gradient(var(--sky),var(--sky)) 81% 100%/8% 11% no-repeat,linear-gradient(var(--cobalt),var(--cobalt)) 100% 63%/7% 9% no-repeat,linear-gradient(var(--sky),var(--sky)) 34% 0/6% 10% no-repeat}
+.home .artwork::after{white-space:pre;position:absolute;padding:3px;background:var(--cobalt);color:#fff;font:clamp(7px,.75vw,12px)/1.15 monospace;text-shadow:none;pointer-events:none}
+.home a[href="saccade.html"] .artwork::after{content:"mem_\A 01>";top:14%;right:1%;left:auto;bottom:auto}
+.home a[href="okibi.html"] .artwork::after{content:"init\A 0x02";top:51%;left:0;right:auto;bottom:auto}
+.home a[href="treena.html"] .artwork::after{content:"rev_\A 03++";bottom:0;right:0;top:auto;left:auto}
+.home a[href="event-recap.html"] .artwork::after{content:"rec.\A [04]";top:20%;left:0;right:auto;bottom:auto}
+.home a[href="residency-promo.html"] .artwork::after{content:"sig_\A 05/>";top:4%;right:0;left:auto;bottom:auto}
+.home a[href="ubc-biztech.html"] .artwork::after{content:"cut_\A 06::";top:3%;left:0;right:auto;bottom:auto}
+
