@@ -135,3 +135,10 @@ body.home-page{height:100svh;overflow:hidden}.home-page .home{height:100svh;min-
 .home a[href="residency-promo.html"] .artwork::after{content:"sig_\A 05/>";top:4%;right:0;left:auto;bottom:auto}
 .home a[href="ubc-biztech.html"] .artwork::after{content:"cut_\A 06::";top:3%;left:0;right:auto;bottom:auto}
 
+
+/* Composite orbit motion without frame-by-frame layout or nested blur passes. */
+.home .project-card{left:50%;top:50%;will-change:transform;transition:none;backface-visibility:hidden;filter:drop-shadow(0 0 9px rgba(220,239,233,.32))}
+.home .project-card:hover,.home .project-card:focus-visible{filter:drop-shadow(0 0 12px rgba(235,247,241,.44))}
+.home .artwork{filter:saturate(.91) sepia(.055)}
+.home::before{filter:saturate(.91) sepia(.055)}
+@media(prefers-reduced-motion:reduce){.home .project-card{will-change:auto}}

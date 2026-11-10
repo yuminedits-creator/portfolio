@@ -11,14 +11,19 @@ const orbit=document.querySelector('.orbit');
 if(orbit){
  const cards=[...orbit.querySelectorAll('.project-card')],button=orbit.querySelector('button'),media=matchMedia('(prefers-reduced-motion: reduce)');
  let paused=media.matches,hovered=false,focused=false,time=0,previous=0,scrollBoost=0;
- function render(){cards.forEach((card,i)=>{const angle=-Math.PI*5/6+i*Math.PI/3+time/90000*Math.PI*2;card.style.left=(50+(innerWidth<=700?34:47)*Math.cos(angle))+'%';card.style.top=(50+49*Math.sin(angle))+'%';});}
+ let radiusX=0,radiusY=0;
+ function measure(){radiusX=orbit.clientWidth*(innerWidth<=700?.34:.47);radiusY=orbit.clientHeight*.49;}
+ const orbitSize=new ResizeObserver(()=>{measure();render()});orbitSize.observe(orbit);measure();
+ function render(){cards.forEach((card,i)=>{const angle=-Math.PI*5/6+i*Math.PI/3+time/90000*Math.PI*2;
+  card.style.transform='translate3d('+(radiusX*Math.cos(angle)).toFixed(2)+'px,'+(radiusY*Math.sin(angle)).toFixed(2)+'px,0) translate(-50%,-50%)';
+ });}
  function syncButton(){button.textContent=paused?'Play orbit':'Pause orbit';button.setAttribute('aria-pressed',String(paused));}
  function frame(now){
   const dt=previous?Math.min(now-previous,100):0;
   if(!paused&&!hovered&&!focused&&!document.hidden)time+=dt*(1+scrollBoost);
   scrollBoost*=Math.exp(-dt/380);
   if(Math.abs(scrollBoost)<.01)scrollBoost=0;
-  previous=now;render();requestAnimationFrame(frame);
+  previous=now;if(dt&&!paused&&!hovered&&!focused&&!document.hidden)render();requestAnimationFrame(frame);
  }
  // Wheel intensity adds momentum, which decays back to the original orbit speed.
  window.addEventListener('wheel',event=>{
